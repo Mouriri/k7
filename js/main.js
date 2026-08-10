@@ -58,6 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Close language dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.lang-dropdown')) {
+            document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('open');
+            });
+        }
+    });
+
     // Cookie Banner Logic
     const cookieBanner = document.getElementById('cookie-banner');
     const acceptCookiesBtn = document.getElementById('accept-cookies');

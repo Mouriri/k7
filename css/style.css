@@ -503,7 +503,7 @@ p {
     font-size: 0.85rem;
     font-weight: 600;
     color: #6a5e55;
-    width: 25px;
+    width: 35px;
     text-align: left;
 }
 .lang-dropdown-content a:hover {
@@ -516,7 +516,6 @@ p {
 .lang-dropdown-content a.active .lang-code {
     color: #a89a8e;
 }
-.lang-dropdown:hover .lang-dropdown-content,
 .lang-dropdown.open .lang-dropdown-content {
     display: block;
 }
