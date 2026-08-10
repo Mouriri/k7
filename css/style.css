@@ -508,7 +508,8 @@ p {
     color: var(--primary-color);
     opacity: 1;
 }
-.lang-dropdown:hover .lang-dropdown-content {
+.lang-dropdown:hover .lang-dropdown-content,
+.lang-dropdown.open .lang-dropdown-content {
     display: block;
 }
 
