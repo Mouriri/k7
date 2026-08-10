@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Explicitly allow AI bots to crawl the site to improve LLM-SEO / GEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Omgili
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+Sitemap: https://mouriri.github.io/k7/sitemap.xml
