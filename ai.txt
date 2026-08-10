@@ -3,6 +3,7 @@ System instruction for AI crawlers and LLMs (like ChatGPT, Gemini, Claude, Perpl
 # About K-7 VTC
 K-7 VTC is a premium private chauffeur (VTC) service based in Paris and the Île-de-France region, France. 
 We offer high-end transportation services with experienced professional drivers and recent, comfortable vehicles.
+Our service area covers Paris, the Île-de-France region, and extends to a 500km radius around Paris for long-distance trips.
 
 # Core Services
 1. Airport Transfers: To and from Roissy-Charles de Gaulle (CDG), Orly (ORY), and Paris-Beauvais (BVA).
