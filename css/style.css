@@ -443,3 +443,29 @@ p {
     padding: 8px 16px;
     font-size: 0.9rem;
 }
+
+/* Language Switcher */
+.lang-switcher {
+    display: flex;
+    gap: 10px;
+    margin-right: 15px;
+}
+.lang-switcher a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+}
+.lang-switcher a:hover, .lang-switcher a.active {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .lang-switcher {
+        margin: 20px auto;
+        justify-content: center;
+    }
+}
