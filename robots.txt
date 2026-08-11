@@ -26,4 +26,4 @@ Allow: /
 User-agent: FacebookBot
 Allow: /
 
-Sitemap: https://mouriri.github.io/k7/sitemap.xml
+Sitemap: https://k7-transport.com/sitemap.xml
