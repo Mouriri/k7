@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css?v=3">
+    <link rel="stylesheet" href="../css/style.css?v=4">
     <link rel="icon" href="../assets/logo.png" type="image/png">
 
     <!-- JSON-LD for AI and Search Engines -->
@@ -84,6 +84,7 @@
         <div class="logo">K-7 VTC</div>
         <ul class="nav-links">
             <li><a href="#accueil">Inicio</a></li>
+            <li><a href="#offre-speciale" class="nav-promo-highlight"><i class="fas fa-fire"></i> Oferta 25€</a></li>
             <li class="nav-dropdown">
                 <a href="#services">Servicios <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a>
                 <div class="nav-dropdown-content">
@@ -117,15 +118,128 @@
     <header id="accueil" class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
+            <a href="#offre-speciale" class="promo-pill" style="margin-bottom: 20px; text-decoration: none; display: inline-flex;">
+                <i class="fas fa-fire"></i> OFERTA ESPECIAL: Beauvais ⇄ París desde 25€/pers (5 a 7 pers.) <i class="fas fa-arrow-right" style="font-size: 0.8em; margin-left: 4px;"></i>
+            </a>
             <span class="badge">Servicio Premium</span>
             <h1>La Excelencia del <br> <span class="highlight">Chófer Privado</span></h1>
             <p>Tus viajes con total tranquilidad con K-7 VTC. Traslados al aeropuerto, lanzaderas y servicio por horas. Comodidad, seguridad y puntualidad garantizadas.</p>
             <div class="hero-buttons">
                 <a href="#reserver" class="btn btn-primary btn-large">Reservar ahora <i class="fas fa-arrow-right"></i></a>
-                <a href="#services" class="btn btn-secondary btn-large">Descubrir nuestros servicios</a>
+                <a href="#offre-speciale" class="btn btn-secondary btn-large">Ver oferta 25€</a>
             </div>
         </div>
     </header>
+
+    <!-- Special Offer Section Beauvais -->
+    <section id="offre-speciale" class="promo-section section">
+        <div class="container">
+            <div class="promo-card">
+                <div class="promo-header">
+                    <div class="promo-floating-badge">
+                        <i class="fas fa-bolt"></i> Oferta Especial Grupos y Familias (5 a 7 personas)
+                    </div>
+                    <h2 class="promo-title">Traslado Aeropuerto Beauvais ⇄ París</h2>
+                    <p class="promo-subtitle">¡Disfrute de un traslado privado en furgoneta VIP de lujo al precio del transporte público!</p>
+                </div>
+
+                <!-- Price Showcase €25 -->
+                <div class="promo-price-hero">
+                    <div class="promo-price-circle">
+                        <span class="promo-price-number">25<span class="promo-price-currency">€</span></span>
+                    </div>
+                    <div class="promo-price-details">
+                        <div class="promo-price-label">Solo 25 € / persona</div>
+                        <div class="promo-price-condition">
+                            <i class="fas fa-users"></i> Válido de 5 a 7 personas (máx. 7)
+                        </div>
+                        <div class="promo-price-note">
+                            Trayecto directo Beauvais ➔ París o París ➔ Beauvais • Precio fijo sin sorpresas
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perks Grid -->
+                <div class="promo-perks-grid">
+                    <div class="promo-perk-item">
+                        <div class="promo-perk-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="promo-perk-title">Puerta a Puerta Directo</div>
+                        <div class="promo-perk-desc">Recogida y llegada exacta en su hotel, domicilio o estación en París.</div>
+                    </div>
+                    <div class="promo-perk-item">
+                        <div class="promo-perk-icon"><i class="fas fa-suitcase-rolling"></i></div>
+                        <div class="promo-perk-title">Equipaje Incluido</div>
+                        <div class="promo-perk-desc">Todas sus maletas y equipaje de mano transportados sin suplementos.</div>
+                    </div>
+                    <div class="promo-perk-item">
+                        <div class="promo-perk-icon"><i class="fas fa-plane-arrival"></i></div>
+                        <div class="promo-perk-title">Seguimiento de Vuelo</div>
+                        <div class="promo-perk-desc">Su chófer rastrea el vuelo en vivo y le espera puntualmente sin recargo por retraso.</div>
+                    </div>
+                    <div class="promo-perk-item">
+                        <div class="promo-perk-icon"><i class="fas fa-couch"></i></div>
+                        <div class="promo-perk-title">Furgoneta VIP de Lujo</div>
+                        <div class="promo-perk-desc">Vehículo espacioso de hasta 7 plazas, aire acondicionado, agua embotellada y Wi-Fi.</div>
+                    </div>
+                </div>
+
+                <!-- Interactive Calculator -->
+                <div class="promo-calculator">
+                    <div class="promo-calc-title">
+                        <i class="fas fa-calculator"></i> Calcule el precio para su grupo (5 a 7 pers.):
+                    </div>
+                    <div class="promo-passenger-selector">
+                        <button type="button" class="passenger-btn active" data-passengers="5">5 personas</button>
+                        <button type="button" class="passenger-btn" data-passengers="6">6 personas</button>
+                        <button type="button" class="passenger-btn" data-passengers="7">7 personas</button>
+                    </div>
+                    <div class="promo-calc-result">
+                        <div class="calc-calc-text">
+                            👥 <span id="calc-passengers-count">5</span> pasajeros × 25€ = <strong id="calc-total-price">125</strong><strong> € Total</strong>
+                        </div>
+                        <div class="calc-calc-sub">
+                            ¡Solo 25 € por persona por un trayecto 100% privado!
+                        </div>
+                    </div>
+
+                    <div class="promo-actions">
+                        <a id="btn-whatsapp-promo" href="https://wa.me/33636396606?text=Hola%20K-7%20VTC,%20me%20gustar%C3%ADa%20reservar%20la%20oferta%20especial%20Aeropuerto%20Beauvais%20-%20Par%C3%ADs%20para%205%20personas%20(125%E2%82%AC%20en%20total,%2025%E2%82%AC/persona)." target="_blank" class="btn-whatsapp-promo">
+                            <i class="fab fa-whatsapp"></i> Reservar esta oferta por WhatsApp
+                        </a>
+                        <div class="promo-phone-direct">
+                            O reserve directamente por teléfono: <a href="tel:+33636396606">+33 6 36 39 66 06</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Bus vs K-7 VTC -->
+                <div class="promo-comparison">
+                    <div class="promo-comparison-title">¿Por qué elegir K-7 VTC en lugar del autobús público de Beauvais?</div>
+                    <div class="promo-comparison-grid">
+                        <div class="compare-box bad">
+                            <h5><i class="fas fa-bus"></i> Autobús Estándar (~17€/pers)</h5>
+                            <ul>
+                                <li>Parada única en Porte Maillot (requiere metro o taxi después)</li>
+                                <li>Largas colas esperando fuera con frío o lluvia</li>
+                                <li>Horarios estrictos y estrés con las conexiones</li>
+                                <li>Muy pesado con maletas grandes o niños</li>
+                            </ul>
+                        </div>
+                        <div class="compare-box good">
+                            <h5><i class="fas fa-star"></i> Oferta Grupo K-7 VTC (25€/pers)</h5>
+                            <ul>
+                                <li>Recogida y llegada directa a la puerta de su hotel o apartamento</li>
+                                <li>Sin esperas: bienvenida personalizada a la salida</li>
+                                <li>Van VIP privada exclusiva para su grupo con gran maletero</li>
+                                <li>Bebidas frías, cargadores de móvil y total tranquilidad</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <section id="services" class="services section">
         <div class="container">

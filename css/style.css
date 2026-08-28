@@ -599,3 +599,602 @@ p {
 .faq-item { background: var(--glass-bg); padding: 25px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--glass-border); text-align: left; }
 .faq-item h4 { color: var(--primary-color); font-size: 1.2rem; margin-bottom: 15px; }
 .faq-item p { margin-bottom: 0; }
+
+/* ==========================================================================
+   OFFRE SPÉCIALE BEAUVAIS - PARIS (25€/PERS DÈS 5 PERS)
+   ========================================================================== */
+
+/* Top Promo Bar */
+.promo-top-bar {
+    background: linear-gradient(90deg, #0d0c0a 0%, #241c0b 25%, #463612 50%, #241c0b 75%, #0d0c0a 100%);
+    background-size: 200% 100%;
+    animation: gradientShift 6s ease-in-out infinite;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1002;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+    text-align: center;
+}
+.promo-top-bar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.promo-pill {
+    background: linear-gradient(135deg, #d4af37, #f3e5ab);
+    color: #000;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+    animation: badgePulse 2s infinite ease-in-out;
+}
+.promo-top-text {
+    font-weight: 500;
+    color: #f0f0f0;
+}
+.promo-top-text strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+.promo-top-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.promo-top-btn:hover {
+    background: var(--primary-color);
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+/* Nav highlight link */
+.nav-links li a.nav-promo-highlight {
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.nav-promo-highlight i {
+    animation: flamePulse 1.5s infinite alternate ease-in-out;
+    color: #ff9800;
+}
+
+/* Promo Section Base */
+.promo-section {
+    position: relative;
+    padding: 90px 0;
+    background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, rgba(10, 10, 12, 0.98) 70%);
+    overflow: hidden;
+}
+.promo-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+/* Master Promo Card */
+.promo-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(26, 24, 20, 0.85), rgba(15, 15, 18, 0.95));
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    border-radius: 28px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(212, 175, 55, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.promo-card:hover {
+    border-color: rgba(212, 175, 55, 0.8);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(212, 175, 55, 0.25);
+}
+.promo-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.04) 50%, transparent 55%);
+    transform: rotate(25deg);
+    animation: shimmerPass 8s infinite linear;
+    pointer-events: none;
+}
+
+/* Floating Badge */
+.promo-floating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+    color: #000;
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    animation: badgeFloat 3.5s ease-in-out infinite;
+}
+.promo-floating-badge i {
+    font-size: 1rem;
+    color: #7b1113;
+}
+
+/* Promo Header & Title */
+.promo-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.promo-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #ffffff 30%, #f3e5ab 70%, #d4af37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.promo-subtitle {
+    font-size: 1.25rem;
+    color: #c9cdd4;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+/* Promo Price Showcase */
+.promo-price-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 20px;
+    padding: 25px 35px;
+    margin: 30px auto;
+    max-width: 650px;
+    position: relative;
+    overflow: hidden;
+}
+.promo-price-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(20, 18, 12, 0.8) 100%);
+    border: 2px solid var(--primary-color);
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+    flex-shrink: 0;
+    animation: pricePulse 3s ease-in-out infinite;
+}
+.promo-price-number {
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.promo-price-currency {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-left: 2px;
+}
+.promo-price-details {
+    text-align: left;
+}
+.promo-price-label {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+.promo-price-condition {
+    font-size: 1.05rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+.promo-price-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Perks Grid */
+.promo-perks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+.promo-perk-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+.promo-perk-item:hover {
+    background: rgba(212, 175, 55, 0.08);
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-4px);
+}
+.promo-perk-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+.promo-perk-item:hover .promo-perk-icon {
+    transform: scale(1.15) rotate(5deg);
+    background: var(--primary-color);
+    color: #000;
+}
+.promo-perk-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+}
+.promo-perk-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Dynamic Interactive Calculator */
+.promo-calculator {
+    background: rgba(12, 12, 15, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 35px 0;
+    text-align: center;
+}
+.promo-calc-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.promo-calc-title i {
+    color: var(--primary-color);
+}
+.promo-passenger-selector {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+.passenger-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.passenger-btn:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+.passenger-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), #b8860b);
+    color: #000;
+    border-color: var(--primary-color);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    transform: scale(1.05);
+}
+
+.promo-calc-result {
+    background: rgba(212, 175, 55, 0.08);
+    border-radius: 14px;
+    padding: 18px 25px;
+    margin-bottom: 25px;
+    display: inline-block;
+    max-width: 100%;
+}
+.calc-calc-text {
+    font-size: 1.15rem;
+    color: #f5f5f5;
+}
+.calc-calc-text strong {
+    color: var(--primary-color);
+    font-size: 1.35rem;
+}
+.calc-calc-sub {
+    font-size: 0.9rem;
+    color: #a8b0ba;
+    margin-top: 5px;
+}
+
+/* Call to actions */
+.promo-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.btn-whatsapp-promo {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.btn-whatsapp-promo:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+    color: #fff;
+}
+.btn-whatsapp-promo i {
+    font-size: 1.4rem;
+}
+.promo-phone-direct {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+.promo-phone-direct a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Comparison Bar */
+.promo-comparison {
+    margin-top: 45px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.promo-comparison-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+.promo-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.compare-box {
+    padding: 20px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+}
+.compare-box.bad {
+    background: rgba(220, 53, 69, 0.08);
+    border: 1px solid rgba(220, 53, 69, 0.25);
+}
+.compare-box.bad h5 {
+    color: #ff6b6b;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.compare-box.bad ul {
+    list-style: none;
+    padding: 0;
+    color: #b0b0b0;
+    line-height: 1.6;
+}
+.compare-box.bad li::before {
+    content: "✕ ";
+    color: #ff6b6b;
+    font-weight: bold;
+}
+.compare-box.good {
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+.compare-box.good h5 {
+    color: var(--primary-color);
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.compare-box.good ul {
+    list-style: none;
+    padding: 0;
+    color: #ffffff;
+    line-height: 1.6;
+}
+.compare-box.good li::before {
+    content: "✓ ";
+    color: #25d366;
+    font-weight: bold;
+}
+
+/* Airports Page Highlight Box (aeroports.html) */
+.bva-promo-callout {
+    margin: 30px 0 40px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(20, 20, 24, 0.95) 100%);
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+.bva-promo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.bva-promo-tag {
+    background: var(--primary-color);
+    color: #000;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.bva-promo-price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+.bva-promo-price span {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: normal;
+}
+.bva-promo-callout p {
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+/* Keyframe Animations */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+    50% { transform: scale(1.04); box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
+}
+@keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+@keyframes pricePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(212, 175, 55, 0.35); }
+    50% { transform: scale(1.03); box-shadow: 0 0 35px rgba(212, 175, 55, 0.6); }
+}
+@keyframes shimmerPass {
+    0% { transform: translate(-30%, -30%) rotate(25deg); }
+    100% { transform: translate(30%, 30%) rotate(25deg); }
+}
+@keyframes flamePulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 2px #ff9800); }
+    100% { transform: scale(1.25); filter: drop-shadow(0 0 8px #ff5722); }
+}
+
+/* Responsive adjustments for Promo */
+@media (max-width: 768px) {
+    .promo-section {
+        padding: 60px 0;
+    }
+    .promo-card {
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+    .promo-title {
+        font-size: 2rem;
+    }
+    .promo-subtitle {
+        font-size: 1.05rem;
+    }
+    .promo-price-hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 15px;
+    }
+    .promo-price-details {
+        text-align: center;
+    }
+    .promo-price-circle {
+        width: 110px;
+        height: 110px;
+    }
+    .promo-price-number {
+        font-size: 2.6rem;
+    }
+    .promo-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+    .btn-whatsapp-promo {
+        width: 100%;
+        justify-content: center;
+        font-size: 1.05rem;
+        padding: 14px 20px;
+    }
+    .promo-top-bar {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+    .promo-top-bar-inner {
+        gap: 8px;
+    }
+}
+

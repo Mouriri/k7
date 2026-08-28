@@ -83,4 +83,49 @@ document.addEventListener('DOMContentLoaded', () => {
             cookieBanner.style.display = 'none';
         });
     }
+
+    // ==========================================
+    // Interactive Calculator - Offre Beauvais 25€
+    // ==========================================
+    const passengerButtons = document.querySelectorAll('.passenger-btn');
+    const calcCountElem = document.getElementById('calc-passengers-count');
+    const calcTotalElem = document.getElementById('calc-total-price');
+    const whatsappPromoBtn = document.getElementById('btn-whatsapp-promo');
+
+    if (passengerButtons.length > 0) {
+        const lang = document.documentElement.lang || 'fr';
+
+        const updateBookingLink = (passengers, total) => {
+            let message = '';
+            if (lang === 'en') {
+                message = `Hello K-7 VTC, I would like to book the special offer Beauvais Airport - Paris for ${passengers} passengers (€${total} total, €25/person).`;
+            } else if (lang === 'es') {
+                message = `Hola K-7 VTC, me gustaría reservar la oferta especial Aeropuerto Beauvais - París para ${passengers} personas (${total}€ en total, 25€/persona).`;
+            } else if (lang === 'de') {
+                message = `Hallo K-7 VTC, ich möchte das Sonderangebot Flughafen Beauvais - Paris für ${passengers} Personen buchen (${total}€ gesamt, 25€/Person).`;
+            } else {
+                message = `Bonjour K-7 VTC, je souhaite réserver l'offre spéciale Aéroport Beauvais - Paris pour ${passengers} personnes (${total}€ au total soit 25€/pers).`;
+            }
+
+            if (whatsappPromoBtn) {
+                whatsappPromoBtn.href = `https://wa.me/33636396606?text=${encodeURIComponent(message)}`;
+            }
+        };
+
+        passengerButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                passengerButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const count = parseInt(this.getAttribute('data-passengers'), 10) || 5;
+                const total = count * 25;
+
+                if (calcCountElem) calcCountElem.textContent = count;
+                if (calcTotalElem) calcTotalElem.textContent = total;
+
+                updateBookingLink(count, total);
+            });
+        });
+    }
 });
+
