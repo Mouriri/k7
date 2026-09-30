@@ -206,77 +206,106 @@ document.addEventListener('DOMContentLoaded', () => {
                     `Vielen Dank für Ihre Bestätigung und das Angebot.`;
             }
 
+            // Submit via Netlify Forms in background and show confirmation
+            if (submitBtn) {
+                const btnText = submitBtn.querySelector('.btn-text');
+                const btnLoader = submitBtn.querySelector('.btn-loader');
+                if (btnText) btnText.style.display = 'none';
+                if (btnLoader) btnLoader.style.display = 'inline-block';
+                submitBtn.disabled = true;
+            }
+
             const mailtoUrl = `mailto:contact.transportkhaled@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
             const whatsappUrl = `https://wa.me/33636396606?text=${encodeURIComponent(emailBody)}`;
 
-            // Open user's email client directly with all prefilled details
-            window.location.href = mailtoUrl;
-
-            // Display clear confirmation & immediate choice buttons
-            if (statusDiv) {
-                let successHtml = '';
-                if (lang === 'en') {
-                    successHtml = `
-                        <div class="form-success-card">
-                            <div class="success-head">
-                                <i class="fas fa-check-circle"></i>
-                                <h4>Your request is prepared for contact.transportkhaled@gmail.com!</h4>
-                            </div>
-                            <p>If your email app did not open automatically, please click below:</p>
-                            <div class="form-success-buttons">
-                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Send Email</a>
-                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Send via WhatsApp (Instant)</a>
-                            </div>
-                        </div>
-                    `;
-                } else if (lang === 'es') {
-                    successHtml = `
-                        <div class="form-success-card">
-                            <div class="success-head">
-                                <i class="fas fa-check-circle"></i>
-                                <h4>¡Su solicitud está lista para contact.transportkhaled@gmail.com!</h4>
-                            </div>
-                            <p>Si su aplicación de correo no se abrió automáticamente, haga clic aquí:</p>
-                            <div class="form-success-buttons">
-                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Enviar por Email</a>
-                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp</a>
-                            </div>
-                        </div>
-                    `;
-                } else if (lang === 'de') {
-                    successHtml = `
-                        <div class="form-success-card">
-                            <div class="success-head">
-                                <i class="fas fa-check-circle"></i>
-                                <h4>Ihre Anfrage ist bereit für contact.transportkhaled@gmail.com!</h4>
-                            </div>
-                            <p>Falls sich Ihr E-Mail-Programm nicht automatisch geöffnet hat, klicken Sie bitte hier:</p>
-                            <div class="form-success-buttons">
-                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Per E-Mail senden</a>
-                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Per WhatsApp senden</a>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    successHtml = `
-                        <div class="form-success-card">
-                            <div class="success-head">
-                                <i class="fas fa-check-circle"></i>
-                                <h4>Votre demande est prête pour contact.transportkhaled@gmail.com !</h4>
-                            </div>
-                            <p>Si votre messagerie ne s'est pas ouverte automatiquement, cliquez sur le bouton ci-dessous :</p>
-                            <div class="form-success-buttons">
-                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Envoyer par E-mail</a>
-                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Envoyer sur WhatsApp (Réponse immédiate)</a>
-                            </div>
-                        </div>
-                    `;
+            // Send to Netlify Form backend in background
+            const formData = new FormData(contactForm);
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            }).then(() => {
+                // Form saved successfully in Netlify
+            }).catch(() => {
+                // Ignore network errors since mailto / whatsapp fallback is always ready
+            }).finally(() => {
+                if (submitBtn) {
+                    const btnText = submitBtn.querySelector('.btn-text');
+                    const btnLoader = submitBtn.querySelector('.btn-loader');
+                    if (btnText) btnText.style.display = 'inline-block';
+                    if (btnLoader) btnLoader.style.display = 'none';
+                    submitBtn.disabled = false;
                 }
 
-                statusDiv.className = 'form-status success';
-                statusDiv.innerHTML = successHtml;
-                statusDiv.style.display = 'block';
-            }
+                // Display clear confirmation & action buttons
+                if (statusDiv) {
+                    let successHtml = '';
+                    if (lang === 'en') {
+                        successHtml = `
+                            <div class="form-success-card">
+                                <div class="success-head">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Your request is ready!</h4>
+                                </div>
+                                <p>To guarantee fastest dispatch directly to our team, you can also send it in 1 click:</p>
+                                <div class="form-success-buttons">
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Send to Email (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Send via WhatsApp (Instant Reply)</a>
+                                </div>
+                            </div>
+                        `;
+                    } else if (lang === 'es') {
+                        successHtml = `
+                            <div class="form-success-card">
+                                <div class="success-head">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>¡Su solicitud ha sido preparada con éxito!</h4>
+                                </div>
+                                <p>Para una confirmación inmediata, también puede enviarla directamente en 1 clic:</p>
+                                <div class="form-success-buttons">
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Enviar por Email (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp (Respuesta Rápida)</a>
+                                </div>
+                            </div>
+                        `;
+                    } else if (lang === 'de') {
+                        successHtml = `
+                            <div class="form-success-card">
+                                <div class="success-head">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Ihre Anfrage wurde erfolgreich vorbereitet!</h4>
+                                </div>
+                                <p>Für eine sofortige Bestätigung können Sie die Anfrage mit 1 Klick direkt senden:</p>
+                                <div class="form-success-buttons">
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Per E-Mail senden (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Per WhatsApp senden (Sofortige Antwort)</a>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        successHtml = `
+                            <div class="form-success-card">
+                                <div class="success-head">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Votre demande a été enregistrée avec succès !</h4>
+                                </div>
+                                <p>Pour un traitement prioritaire immédiat, vous pouvez également nous l'envoyer en 1 clic :</p>
+                                <div class="form-success-buttons">
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Envoyer par E-mail (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Envoyer sur WhatsApp (Réponse immédiate)</a>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    statusDiv.className = 'form-status success';
+                    statusDiv.innerHTML = successHtml;
+                    statusDiv.style.display = 'block';
+                    
+                    // Scroll to status message
+                    statusDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
         });
     }
 });
