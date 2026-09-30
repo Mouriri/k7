@@ -127,5 +127,89 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // ==========================================
+    // AJAX Contact / Reservation Form
+    // ==========================================
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('form-submit-btn');
+            const statusDiv = document.getElementById('form-status');
+            const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+            const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
+            const lang = document.documentElement.lang || 'fr';
+
+            // Loading state
+            if (submitBtn) submitBtn.disabled = true;
+            if (btnText) btnText.style.display = 'none';
+            if (btnLoader) btnLoader.style.display = 'inline-flex';
+            if (statusDiv) {
+                statusDiv.style.display = 'none';
+                statusDiv.className = 'form-status';
+                statusDiv.innerHTML = '';
+            }
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/contact.transportkhaled@gmail.com', {
+                    method: 'POST',
+                    headers: { 
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok && (result.success === "true" || result.success === true || result.message)) {
+                    let successMessage = '';
+                    if (lang === 'en') {
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Thank you!</strong> Your request has been sent successfully to <strong>contact.transportkhaled@gmail.com</strong>. We will get back to you shortly.</div>';
+                    } else if (lang === 'es') {
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>¡Muchas gracias!</strong> Su solicitud ha sido enviada con éxito a <strong>contact.transportkhaled@gmail.com</strong>. Nos pondremos en contacto con usted a la brevedad.</div>';
+                    } else if (lang === 'de') {
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Vielen Dank!</strong> Ihre Anfrage wurde erfolgreich an <strong>contact.transportkhaled@gmail.com</strong> gesendet. Wir werden uns in Kürze bei Ihnen melden.</div>';
+                    } else {
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Merci !</strong> Votre demande a bien été transmise à <strong>contact.transportkhaled@gmail.com</strong>. Notre équipe vous répondra dans les plus brefs délais.</div>';
+                    }
+
+                    if (statusDiv) {
+                        statusDiv.className = 'form-status success';
+                        statusDiv.innerHTML = successMessage;
+                        statusDiv.style.display = 'flex';
+                    }
+
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.message || 'Error sending form');
+                }
+            } catch (err) {
+                let errorMessage = '';
+                if (lang === 'en') {
+                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>An error occurred while sending. You can contact us directly by email at <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> or via WhatsApp.</div>';
+                } else if (lang === 'es') {
+                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>Ocurrió un error al enviar el formulario. Puede contactarnos directamente por email en <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> o por WhatsApp.</div>';
+                } else if (lang === 'de') {
+                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>Beim Senden ist ein Fehler aufgetreten. Sie können uns direkt per E-Mail unter <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> oder per WhatsApp kontaktieren.</div>';
+                } else {
+                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>Une erreur est survenue lors de l\'envoi. Vous pouvez nous contacter directement par email à <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> ou par WhatsApp.</div>';
+                }
+
+                if (statusDiv) {
+                    statusDiv.className = 'form-status error';
+                    statusDiv.innerHTML = errorMessage;
+                    statusDiv.style.display = 'flex';
+                }
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+                if (btnText) btnText.style.display = 'inline-flex';
+                if (btnLoader) btnLoader.style.display = 'none';
+            }
+        });
+    }
 });
 

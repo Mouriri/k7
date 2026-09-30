@@ -97,6 +97,7 @@
             <li><a href="#destinations">Destinations</a></li>
             <li><a href="#avis">Avis</a></li>
             <li><a href="#engagements">Engagements</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="lang-switcher">
             <div class="lang-dropdown" onclick="this.classList.toggle('open')">
@@ -109,7 +110,7 @@
                 </div>
             </div>
         </div>
-        <a href="#reserver" class="btn btn-primary nav-btn">Réserver</a>
+        <a href="#contact" class="btn btn-primary nav-btn">Réserver</a>
         <div class="burger">
             <i class="fas fa-bars"></i>
         </div>
@@ -125,7 +126,7 @@
             <h1>L'Excellence du <br> <span class="highlight">Chauffeur Privé</span></h1>
             <p>Vos trajets en toute sérénité avec K-7 VTC. Navettes, transferts aéroports et mises à disposition. Confort, sécurité & ponctualité garantis.</p>
             <div class="hero-buttons">
-                <a href="#reserver" class="btn btn-primary btn-large">Réserver maintenant <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-primary btn-large">Réserver maintenant <i class="fas fa-arrow-right"></i></a>
                 <a href="#offre-speciale" class="btn btn-secondary btn-large">Voir l'offre 25€</a>
             </div>
         </div>
@@ -344,14 +345,168 @@
             </div>
         </div>
     </section>
-<section id="reserver" class="cta-section section">
-        <div class="container text-center">
-            <h2>Prêt pour une expérience haut de gamme ?</h2>
-            <p>Réservez votre trajet dès maintenant en nous contactant directement.</p>
-            <a href="https://wa.me/33636396606" target="_blank" class="btn btn-primary btn-large cta-btn">
-                <i class="fab fa-whatsapp"></i> Réserver par WhatsApp
-            </a>
-            <p class="mt-2 text-sm">Ou par téléphone au <a href="tel:+33636396606">06 36 39 66 06</a></p>
+    <!-- Section Contact & Réservation -->
+    <section id="contact" class="contact-section section">
+        <div class="container">
+            <h2 class="section-title">Contact & Réservation</h2>
+            <p class="section-subtitle text-center" style="max-width: 680px; margin: -20px auto 40px; font-size: 1.1rem; color: var(--text-muted);">
+                Réservez votre chauffeur privé ou demandez un devis sur-mesure. Notre équipe vous répond immédiatement.
+            </p>
+
+            <div class="contact-wrapper">
+                <!-- Colonne Coordonnées directes -->
+                <div class="contact-info-col">
+                    <div class="contact-card glass">
+                        <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                        <h3>E-mail direct</h3>
+                        <p>Écrivez-nous directement pour vos demandes et devis :</p>
+                        <a href="mailto:contact.transportkhaled@gmail.com" class="contact-highlight-link">
+                            contact.transportkhaled@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="contact-card glass">
+                        <div class="contact-card-icon"><i class="fab fa-whatsapp"></i></div>
+                        <h3>Réservation Express WhatsApp</h3>
+                        <p>Service réactif 24h/24 & 7j/7 pour confirmation immédiate :</p>
+                        <a href="https://wa.me/33636396606" target="_blank" class="btn-whatsapp-direct">
+                            <i class="fab fa-whatsapp"></i> Échanger sur WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="contact-card glass">
+                        <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
+                        <h3>Appel téléphonique</h3>
+                        <p>Une question urgente ? Joignez-nous directement :</p>
+                        <a href="tel:+33636396606" class="contact-highlight-link">
+                            +33 6 36 39 66 06
+                        </a>
+                    </div>
+
+                    <div class="contact-features-mini">
+                        <div class="mini-feat"><i class="fas fa-check-circle"></i> Tarifs 100% fixes et transparents sans surprise</div>
+                        <div class="mini-feat"><i class="fas fa-check-circle"></i> Suivi des vols en temps réel (zéro frais d'attente)</div>
+                        <div class="mini-feat"><i class="fas fa-check-circle"></i> Véhicules haut de gamme VIP (jusqu'à 7 places)</div>
+                    </div>
+                </div>
+
+                <!-- Colonne Formulaire de contact -->
+                <div class="contact-form-col">
+                    <div class="contact-form-card glass">
+                        <div class="form-header">
+                            <h3><i class="fas fa-paper-plane" style="color: var(--primary-color); margin-right: 10px;"></i> Formulaire de Contact & Devis</h3>
+                            <p>Remplissez les informations ci-dessous pour recevoir une confirmation rapide.</p>
+                        </div>
+
+                        <form id="contact-form" action="https://formsubmit.co/contact.transportkhaled@gmail.com" method="POST" class="custom-contact-form">
+                            <!-- Configuration FormSubmit -->
+                            <input type="hidden" name="_subject" value="Nouvelle demande de réservation K-7 VTC">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="text" name="_honey" style="display:none">
+
+                            <div class="form-grid">
+                                <!-- Nom & Prénom -->
+                                <div class="form-group">
+                                    <label for="contact-name"><i class="fas fa-user"></i> Nom & Prénom <span class="required">*</span></label>
+                                    <input type="text" id="contact-name" name="nom" required placeholder="Ex : Jean Dupont">
+                                </div>
+
+                                <!-- E-mail -->
+                                <div class="form-group">
+                                    <label for="contact-email"><i class="fas fa-envelope"></i> Adresse E-mail <span class="required">*</span></label>
+                                    <input type="email" id="contact-email" name="email" required placeholder="Ex : jean.dupont@email.com">
+                                </div>
+
+                                <!-- Téléphone -->
+                                <div class="form-group">
+                                    <label for="contact-phone"><i class="fas fa-phone"></i> Téléphone / WhatsApp <span class="required">*</span></label>
+                                    <input type="tel" id="contact-phone" name="telephone" required placeholder="Ex : +33 6 12 34 56 78">
+                                </div>
+
+                                <!-- Type de prestation -->
+                                <div class="form-group">
+                                    <label for="contact-service"><i class="fas fa-car-side"></i> Prestation souhaitée</label>
+                                    <select id="contact-service" name="service">
+                                        <option value="Navette Aéroport">Navette Aéroport (CDG, Orly, Beauvais)</option>
+                                        <option value="Offre Spéciale Beauvais 25€">Offre Spéciale Beauvais ⇄ Paris (25€/pers)</option>
+                                        <option value="Parcs d'Attractions">Parcs d'Attractions (Disney, Astérix)</option>
+                                        <option value="Excursions Touristiques">Excursions Touristiques (Versailles, Giverny...)</option>
+                                        <option value="Mise à Disposition">Mise à Disposition (Affaires, Mariage...)</option>
+                                        <option value="Longue Distance">Trajet Longue Distance (Lille, Province, Europe)</option>
+                                        <option value="Autre demande">Autre demande sur-mesure</option>
+                                    </select>
+                                </div>
+
+                                <!-- Lieu de départ -->
+                                <div class="form-group">
+                                    <label for="contact-pickup"><i class="fas fa-map-marker-alt"></i> Lieu de départ / Prise en charge</label>
+                                    <input type="text" id="contact-pickup" name="depart" placeholder="Adresse, aéroport, gare, hôtel...">
+                                </div>
+
+                                <!-- Lieu d'arrivée -->
+                                <div class="form-group">
+                                    <label for="contact-dropoff"><i class="fas fa-flag-checkered"></i> Lieu d'arrivée / Destination</label>
+                                    <input type="text" id="contact-dropoff" name="destination" placeholder="Adresse, aéroport, gare, ville...">
+                                </div>
+
+                                <!-- Date & Heure -->
+                                <div class="form-group">
+                                    <label for="contact-date"><i class="fas fa-calendar-alt"></i> Date & Heure souhaitée</label>
+                                    <input type="datetime-local" id="contact-date" name="date_heure">
+                                </div>
+
+                                <!-- Passagers & Bagages -->
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="contact-passengers"><i class="fas fa-users"></i> Passagers</label>
+                                        <select id="contact-passengers" name="passagers">
+                                            <option value="1">1 passager</option>
+                                            <option value="2">2 passagers</option>
+                                            <option value="3">3 passagers</option>
+                                            <option value="4">4 passagers</option>
+                                            <option value="5" selected>5 passagers</option>
+                                            <option value="6">6 passagers</option>
+                                            <option value="7">7 passagers</option>
+                                            <option value="8+">8 passagers ou plus</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact-luggage"><i class="fas fa-suitcase"></i> Bagages</label>
+                                        <select id="contact-luggage" name="bagages">
+                                            <option value="0-1">0 à 1 valise</option>
+                                            <option value="2-3">2 à 3 valises</option>
+                                            <option value="4-5" selected>4 à 5 valises</option>
+                                            <option value="6-7">6 à 7 valises</option>
+                                            <option value="8+">8 valises ou plus</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Message / Précisions -->
+                            <div class="form-group full-width" style="margin-top: 15px;">
+                                <label for="contact-message"><i class="fas fa-comment-dots"></i> Message ou précisions complémentaires</label>
+                                <textarea id="contact-message" name="message" rows="4" placeholder="N° de vol/train, besoins particuliers (siège bébé, rehausseur), demandes spécifiques..."></textarea>
+                            </div>
+
+                            <!-- Message de statut dynamique (Succès / Erreur) -->
+                            <div id="form-status" class="form-status" style="display: none;"></div>
+
+                            <!-- Actions du formulaire -->
+                            <div class="form-actions" style="margin-top: 20px;">
+                                <button type="submit" id="form-submit-btn" class="btn btn-primary btn-large btn-submit-form">
+                                    <span class="btn-text"><i class="fas fa-paper-plane"></i> Envoyer ma demande</span>
+                                    <span class="btn-loader" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Envoi en cours...</span>
+                                </button>
+                                <p class="form-privacy-note">
+                                    <i class="fas fa-lock"></i> Vos données sont protégées et transmises directement à notre équipe pour établir votre devis.
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -375,6 +530,7 @@
                     <a href="mise-a-disposition.html">Mise à Disposition</a>
                 </div>
             </li>
+                        <li><a href="#contact">Contact & Réservation</a></li>
                         <li><a href="politique-confidentialite.html">Mentions Légales & RGPD</a></li>
                     </ul>
                 </div>
