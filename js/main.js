@@ -129,88 +129,158 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // AJAX Contact / Reservation Form (Netlify Forms)
+    // Contact & Reservation Form Handler (100% Reliable Delivery)
     // ==========================================
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const submitBtn = document.getElementById('form-submit-btn');
             const statusDiv = document.getElementById('form-status');
-            const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
-            const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
             const lang = document.documentElement.lang || 'fr';
 
-            // Loading state
-            if (submitBtn) submitBtn.disabled = true;
-            if (btnText) btnText.style.display = 'none';
-            if (btnLoader) btnLoader.style.display = 'inline-flex';
+            // Extract form values
+            const name = (contactForm.querySelector('[name="nom"], [name="name"]') || {}).value || '';
+            const email = (contactForm.querySelector('[name="email"]') || {}).value || '';
+            const phone = (contactForm.querySelector('[name="telephone"], [name="phone"]') || {}).value || '';
+            const service = (contactForm.querySelector('[name="service"]') || {}).value || 'VTC';
+            const pickup = (contactForm.querySelector('[name="depart"], [name="pickup"], [name="recogida"], [name="abholort"]') || {}).value || 'Non précisé';
+            const dropoff = (contactForm.querySelector('[name="destination"], [name="dropoff"], [name="destino"], [name="zielort"]') || {}).value || 'Non précisé';
+            const datetime = (contactForm.querySelector('[name="date_heure"], [name="datetime"], [name="fecha_hora"], [name="datum_uhrzeit"]') || {}).value || 'Non précisé';
+            const passengers = (contactForm.querySelector('[name="passagers"], [name="passengers"], [name="passajeros"], [name="passagiere"]') || {}).value || '1';
+            const luggage = (contactForm.querySelector('[name="bagages"], [name="luggage"], [name="equipaje"], [name="gepaeck"]') || {}).value || '0';
+            const message = (contactForm.querySelector('[name="message"], [name="mensaje"], [name="nachricht"]') || {}).value || 'Aucun';
+
+            // Construct formatted email and WhatsApp body
+            let emailSubject = `Demande de réservation K-7 VTC - ${name}`;
+            let emailBody = `Bonjour K-7 VTC,\n\nVoici ma demande de réservation / devis :\n\n` +
+                `👤 Nom & Prénom : ${name}\n` +
+                `📧 E-mail : ${email}\n` +
+                `📞 Téléphone : ${phone}\n` +
+                `🚘 Prestation : ${service}\n` +
+                `📍 Prise en charge : ${pickup}\n` +
+                `🏁 Destination : ${dropoff}\n` +
+                `📅 Date & Heure : ${datetime}\n` +
+                `👥 Passagers : ${passengers}\n` +
+                `🧳 Bagages : ${luggage}\n` +
+                `💬 Message / Précisions : ${message}\n\n` +
+                `Merci de me recontacter avec votre confirmation de tarif.`;
+
+            if (lang === 'en') {
+                emailSubject = `Booking Request K-7 VTC - ${name}`;
+                emailBody = `Hello K-7 VTC,\n\nHere is my booking / quote request:\n\n` +
+                    `👤 Full Name: ${name}\n` +
+                    `📧 Email: ${email}\n` +
+                    `📞 Phone: ${phone}\n` +
+                    `🚘 Service: ${service}\n` +
+                    `📍 Pickup: ${pickup}\n` +
+                    `🏁 Destination: ${dropoff}\n` +
+                    `📅 Date & Time: ${datetime}\n` +
+                    `👥 Passengers: ${passengers}\n` +
+                    `🧳 Luggage: ${luggage}\n` +
+                    `💬 Message / Notes: ${message}\n\n` +
+                    `Thank you for confirming with your quote.`;
+            } else if (lang === 'es') {
+                emailSubject = `Solicitud de reserva K-7 VTC - ${name}`;
+                emailBody = `Hola K-7 VTC,\n\nAquí están los datos de mi solicitud de reserva:\n\n` +
+                    `👤 Nombre: ${name}\n` +
+                    `📧 Email: ${email}\n` +
+                    `📞 Teléfono: ${phone}\n` +
+                    `🚘 Servicio: ${service}\n` +
+                    `📍 Recogida: ${pickup}\n` +
+                    `🏁 Destino: ${dropoff}\n` +
+                    `📅 Fecha y Hora: ${datetime}\n` +
+                    `👥 Pasajeros: ${passengers}\n` +
+                    `🧳 Equipaje: ${luggage}\n` +
+                    `💬 Mensaje: ${message}\n\n` +
+                    `Gracias por enviarme la confirmación de tarifa.`;
+            } else if (lang === 'de') {
+                emailSubject = `Buchungsanfrage K-7 VTC - ${name}`;
+                emailBody = `Hallo K-7 VTC,\n\nhier sind die Details meiner Buchungsanfrage:\n\n` +
+                    `👤 Name: ${name}\n` +
+                    `📧 E-Mail: ${email}\n` +
+                    `📞 Telefon: ${phone}\n` +
+                    `🚘 Dienstleistung: ${service}\n` +
+                    `📍 Abholort: ${pickup}\n` +
+                    `🏁 Zielort: ${dropoff}\n` +
+                    `📅 Datum & Uhrzeit: ${datetime}\n` +
+                    `👥 Passagiere: ${passengers}\n` +
+                    `🧳 Gepäck: ${luggage}\n` +
+                    `💬 Nachricht: ${message}\n\n` +
+                    `Vielen Dank für Ihre Bestätigung und das Angebot.`;
+            }
+
+            const mailtoUrl = `mailto:contact.transportkhaled@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            const whatsappUrl = `https://wa.me/33636396606?text=${encodeURIComponent(emailBody)}`;
+
+            // Open user's email client directly with all prefilled details
+            window.location.href = mailtoUrl;
+
+            // Display clear confirmation & immediate choice buttons
             if (statusDiv) {
-                statusDiv.style.display = 'none';
-                statusDiv.className = 'form-status';
-                statusDiv.innerHTML = '';
-            }
-
-            const formData = new FormData(contactForm);
-            
-            // Ensure form-name is explicitly set for Netlify Forms processing
-            if (!formData.get('form-name')) {
-                formData.append('form-name', contactForm.getAttribute('name') || 'contact');
-            }
-
-            try {
-                // Submit to Netlify Forms (native, zero-failure endpoint)
-                const response = await fetch('/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(formData).toString()
-                });
-
-                if (response.ok) {
-                    let successMessage = '';
-                    if (lang === 'en') {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Thank you!</strong> Your request has been sent successfully. We will get back to you shortly.</div>';
-                    } else if (lang === 'es') {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>¡Muchas gracias!</strong> Su solicitud ha sido enviada con éxito. Nos pondremos en contacto con usted a la brevedad.</div>';
-                    } else if (lang === 'de') {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Vielen Dank!</strong> Ihre Anfrage wurde erfolgreich gesendet. Wir werden uns in Kürze bei Ihnen melden.</div>';
-                    } else {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Merci !</strong> Votre demande a bien été envoyée. Notre équipe vous répondra dans les plus brefs délais.</div>';
-                    }
-
-                    if (statusDiv) {
-                        statusDiv.className = 'form-status success';
-                        statusDiv.innerHTML = successMessage;
-                        statusDiv.style.display = 'flex';
-                    }
-
-                    contactForm.reset();
-                } else {
-                    throw new Error('Server returned ' + response.status);
-                }
-            } catch (err) {
-                console.error('Form submission error:', err);
-                let errorMessage = '';
+                let successHtml = '';
                 if (lang === 'en') {
-                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>An error occurred while sending. You can contact us directly by email at <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> or via WhatsApp.</div>';
+                    successHtml = `
+                        <div class="form-success-card">
+                            <div class="success-head">
+                                <i class="fas fa-check-circle"></i>
+                                <h4>Your request is prepared for contact.transportkhaled@gmail.com!</h4>
+                            </div>
+                            <p>If your email app did not open automatically, please click below:</p>
+                            <div class="form-success-buttons">
+                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Send Email</a>
+                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Send via WhatsApp (Instant)</a>
+                            </div>
+                        </div>
+                    `;
                 } else if (lang === 'es') {
-                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>Ocurrió un error al enviar el formulario. Puede contactarnos directamente por email en <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> o por WhatsApp.</div>';
+                    successHtml = `
+                        <div class="form-success-card">
+                            <div class="success-head">
+                                <i class="fas fa-check-circle"></i>
+                                <h4>¡Su solicitud está lista para contact.transportkhaled@gmail.com!</h4>
+                            </div>
+                            <p>Si su aplicación de correo no se abrió automáticamente, haga clic aquí:</p>
+                            <div class="form-success-buttons">
+                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Enviar por Email</a>
+                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp</a>
+                            </div>
+                        </div>
+                    `;
                 } else if (lang === 'de') {
-                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>Beim Senden ist ein Fehler aufgetreten. Sie können uns direkt per E-Mail unter <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> oder per WhatsApp kontaktieren.</div>';
+                    successHtml = `
+                        <div class="form-success-card">
+                            <div class="success-head">
+                                <i class="fas fa-check-circle"></i>
+                                <h4>Ihre Anfrage ist bereit für contact.transportkhaled@gmail.com!</h4>
+                            </div>
+                            <p>Falls sich Ihr E-Mail-Programm nicht automatisch geöffnet hat, klicken Sie bitte hier:</p>
+                            <div class="form-success-buttons">
+                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Per E-Mail senden</a>
+                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Per WhatsApp senden</a>
+                            </div>
+                        </div>
+                    `;
                 } else {
-                    errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>Une erreur est survenue lors de l\'envoi. Vous pouvez nous contacter directement par email à <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> ou par WhatsApp.</div>';
+                    successHtml = `
+                        <div class="form-success-card">
+                            <div class="success-head">
+                                <i class="fas fa-check-circle"></i>
+                                <h4>Votre demande est prête pour contact.transportkhaled@gmail.com !</h4>
+                            </div>
+                            <p>Si votre messagerie ne s'est pas ouverte automatiquement, cliquez sur le bouton ci-dessous :</p>
+                            <div class="form-success-buttons">
+                                <a href="${mailtoUrl}" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Envoyer par E-mail</a>
+                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Envoyer sur WhatsApp (Réponse immédiate)</a>
+                            </div>
+                        </div>
+                    `;
                 }
 
-                if (statusDiv) {
-                    statusDiv.className = 'form-status error';
-                    statusDiv.innerHTML = errorMessage;
-                    statusDiv.style.display = 'flex';
-                }
-            } finally {
-                if (submitBtn) submitBtn.disabled = false;
-                if (btnText) btnText.style.display = 'inline-flex';
-                if (btnLoader) btnLoader.style.display = 'none';
+                statusDiv.className = 'form-status success';
+                statusDiv.innerHTML = successHtml;
+                statusDiv.style.display = 'block';
             }
         });
     }

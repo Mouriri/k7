@@ -1442,6 +1442,33 @@ p {
     font-size: 1.4rem;
     flex-shrink: 0;
 }
+.form-success-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.form-success-card .success-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-success-card .success-head h4 {
+    font-size: 1.1rem;
+    color: #75f096;
+    margin: 0;
+}
+.form-success-card p {
+    color: #e0e0e0;
+    font-size: 0.92rem;
+    margin: 0;
+}
+.form-success-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
 
 /* Submit Actions */
 .form-actions {
