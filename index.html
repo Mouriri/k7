@@ -398,12 +398,12 @@
                             <p>Remplissez les informations ci-dessous pour recevoir une confirmation rapide.</p>
                         </div>
 
-                        <form id="contact-form" action="https://formsubmit.co/contact.transportkhaled@gmail.com" method="POST" class="custom-contact-form">
-                            <!-- Configuration FormSubmit -->
-                            <input type="hidden" name="_subject" value="Nouvelle demande de réservation K-7 VTC">
-                            <input type="hidden" name="_template" value="table">
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="text" name="_honey" style="display:none">
+                        <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/" class="custom-contact-form">
+                            <!-- Netlify Forms Configuration -->
+                            <input type="hidden" name="form-name" value="contact">
+                            <p style="display:none">
+                                <label>Ne pas remplir ce champ : <input name="bot-field" /></label>
+                            </p>
 
                             <div class="form-grid">
                                 <!-- Nom & Prénom -->

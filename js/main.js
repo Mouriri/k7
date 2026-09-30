@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // AJAX Contact / Reservation Form
+    // AJAX Contact / Reservation Form (Netlify Forms)
     // ==========================================
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -153,28 +153,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const formData = new FormData(contactForm);
+            
+            // Ensure form-name is explicitly set for Netlify Forms processing
+            if (!formData.get('form-name')) {
+                formData.append('form-name', contactForm.getAttribute('name') || 'contact');
+            }
 
             try {
-                const response = await fetch('https://formsubmit.co/ajax/contact.transportkhaled@gmail.com', {
+                // Submit to Netlify Forms (native, zero-failure endpoint)
+                const response = await fetch('/', {
                     method: 'POST',
-                    headers: { 
-                        'Accept': 'application/json'
-                    },
-                    body: formData
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
                 });
 
-                const result = await response.json();
-
-                if (response.ok && (result.success === "true" || result.success === true || result.message)) {
+                if (response.ok) {
                     let successMessage = '';
                     if (lang === 'en') {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Thank you!</strong> Your request has been sent successfully to <strong>contact.transportkhaled@gmail.com</strong>. We will get back to you shortly.</div>';
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Thank you!</strong> Your request has been sent successfully. We will get back to you shortly.</div>';
                     } else if (lang === 'es') {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>¡Muchas gracias!</strong> Su solicitud ha sido enviada con éxito a <strong>contact.transportkhaled@gmail.com</strong>. Nos pondremos en contacto con usted a la brevedad.</div>';
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>¡Muchas gracias!</strong> Su solicitud ha sido enviada con éxito. Nos pondremos en contacto con usted a la brevedad.</div>';
                     } else if (lang === 'de') {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Vielen Dank!</strong> Ihre Anfrage wurde erfolgreich an <strong>contact.transportkhaled@gmail.com</strong> gesendet. Wir werden uns in Kürze bei Ihnen melden.</div>';
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Vielen Dank!</strong> Ihre Anfrage wurde erfolgreich gesendet. Wir werden uns in Kürze bei Ihnen melden.</div>';
                     } else {
-                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Merci !</strong> Votre demande a bien été transmise à <strong>contact.transportkhaled@gmail.com</strong>. Notre équipe vous répondra dans les plus brefs délais.</div>';
+                        successMessage = '<i class="fas fa-check-circle"></i> <div><strong>Merci !</strong> Votre demande a bien été envoyée. Notre équipe vous répondra dans les plus brefs délais.</div>';
                     }
 
                     if (statusDiv) {
@@ -185,9 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     contactForm.reset();
                 } else {
-                    throw new Error(result.message || 'Error sending form');
+                    throw new Error('Server returned ' + response.status);
                 }
             } catch (err) {
+                console.error('Form submission error:', err);
                 let errorMessage = '';
                 if (lang === 'en') {
                     errorMessage = '<i class="fas fa-exclamation-triangle"></i> <div>An error occurred while sending. You can contact us directly by email at <a href="mailto:contact.transportkhaled@gmail.com" style="text-decoration:underline;color:inherit;font-weight:bold;">contact.transportkhaled@gmail.com</a> or via WhatsApp.</div>';
