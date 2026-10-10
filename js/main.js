@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.disabled = true;
             }
 
-            const mailtoUrl = `mailto:contact.transportkhaled@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            const mailtoUrl = `mailto:contact.k7vtc@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
             const whatsappUrl = `https://wa.me/33636396606?text=${encodeURIComponent(emailBody)}`;
 
             // Send to Netlify Form backend in background
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <p>To guarantee fastest dispatch directly to our team, you can also send it in 1 click:</p>
                                 <div class="form-success-buttons">
-                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Send to Email (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Send to Email (contact.k7vtc@gmail.com)</a>
                                     <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Send via WhatsApp (Instant Reply)</a>
                                 </div>
                             </div>
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <p>Para una confirmación inmediata, también puede enviarla directamente en 1 clic:</p>
                                 <div class="form-success-buttons">
-                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Enviar por Email (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Enviar por Email (contact.k7vtc@gmail.com)</a>
                                     <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp (Respuesta Rápida)</a>
                                 </div>
                             </div>
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <p>Für eine sofortige Bestätigung können Sie die Anfrage mit 1 Klick direkt senden:</p>
                                 <div class="form-success-buttons">
-                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Per E-Mail senden (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Per E-Mail senden (contact.k7vtc@gmail.com)</a>
                                     <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Per WhatsApp senden (Sofortige Antwort)</a>
                                 </div>
                             </div>
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <p>Pour un traitement prioritaire immédiat, vous pouvez également nous l'envoyer en 1 clic :</p>
                                 <div class="form-success-buttons">
-                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Envoyer par E-mail (contact.transportkhaled@gmail.com)</a>
+                                    <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Envoyer par E-mail (contact.k7vtc@gmail.com)</a>
                                     <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-direct btn-sm"><i class="fab fa-whatsapp"></i> Envoyer sur WhatsApp (Réponse immédiate)</a>
                                 </div>
                             </div>
