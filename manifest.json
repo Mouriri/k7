@@ -1,0 +1,65 @@
+{
+  "id": "/",
+  "name": "K-7 VTC | Chauffeur Privé & Navettes",
+  "short_name": "K-7 VTC",
+  "description": "Service de chauffeur privé VTC premium à Paris, navettes aéroports (Beauvais, CDG, Orly), parcs d'attractions et mises à disposition.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0c",
+  "theme_color": "#0a0a0c",
+  "lang": "fr",
+  "dir": "ltr",
+  "categories": ["travel", "transportation", "lifestyle"],
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Réserver un trajet",
+      "short_name": "Réserver",
+      "description": "Réserver un chauffeur privé K-7 VTC",
+      "url": "/index.html#contact",
+      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Offre Beauvais 25€",
+      "short_name": "Beauvais 25€",
+      "description": "Navette Aéroport Beauvais ⇄ Paris dès 25€/pers",
+      "url": "/index.html#offre-speciale",
+      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Navettes Aéroports",
+      "short_name": "Aéroports",
+      "description": "Transferts CDG, Orly, Beauvais",
+      "url": "/aeroports.html",
+      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

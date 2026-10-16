@@ -459,5 +459,250 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // ==========================================
+    // PWA (Progressive Web App) - iOS & Android Installation
+    // ==========================================
+    const initPWA = () => {
+        const lang = (document.documentElement.lang || 'fr').slice(0, 2).toLowerCase();
+        const isSubfolder = /\/(en|es|de)\//i.test(window.location.pathname);
+        const assetPrefix = isSubfolder ? '../' : '';
+
+        // 1. Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swPath = isSubfolder ? '../sw.js' : 'sw.js';
+                navigator.serviceWorker.register(swPath, { scope: isSubfolder ? '../' : './' }).catch(() => {
+                    navigator.serviceWorker.register('/sw.js').catch(() => {});
+                });
+            });
+        }
+
+        // 2. Check if already running in standalone mode (already installed)
+        const isStandalone =
+            window.matchMedia('(display-mode: standalone)').matches ||
+            window.navigator.standalone === true;
+
+        if (isStandalone) return;
+
+        // 3. Detect platform (iOS vs Android/Desktop)
+        const ua = window.navigator.userAgent || '';
+        const isIOS =
+            /iPad|iPhone|iPod/.test(ua) ||
+            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+        // Translations for FR, EN, ES, DE
+        const i18n = {
+            fr: {
+                bannerTitle: 'Application K-7 VTC',
+                bannerSub: 'Installez notre app sur iOS & Android (accès hors-ligne & réservation 1-clic)',
+                installBtn: 'Installer',
+                footerBtn: 'Installer l\'Application (iOS / Android)',
+                iosModalTitle: 'Installer K-7 VTC sur iPhone / iPad',
+                iosModalSub: 'Ajoutez l\'application sur votre écran d\'accueil en 2 secondes :',
+                iosStep1: 'Appuyez sur le bouton <span class="pwa-badge-inline"><i class="fas fa-arrow-up-from-bracket"></i> Partager</span> dans la barre de Safari.',
+                iosStep2: 'Faites défiler et appuyez sur <span class="pwa-badge-inline"><i class="far fa-plus-square"></i> Sur l\'écran d\'accueil</span>.',
+                iosStep3: 'Appuyez sur <strong>« Ajouter »</strong> en haut à droite pour lancer l\'application.',
+                androidModalTitle: 'Installer l\'application K-7 VTC',
+                androidModalSub: 'Pour installer l\'application sur votre appareil :',
+                androidStep1: 'Appuyez sur le menu <span class="pwa-badge-inline"><i class="fas fa-ellipsis-vertical"></i></span> de votre navigateur (en haut à droite).',
+                androidStep2: 'Sélectionnez <span class="pwa-badge-inline"><i class="fas fa-mobile-screen-button"></i> Installer l\'application</span> ou <strong>« Ajouter à l\'écran d\'accueil »</strong>.',
+                closeBtn: 'Compris'
+            },
+            en: {
+                bannerTitle: 'K-7 VTC App',
+                bannerSub: 'Install our app on iOS & Android for 1-click booking & offline access',
+                installBtn: 'Install',
+                footerBtn: 'Install App (iOS / Android)',
+                iosModalTitle: 'Install K-7 VTC on iPhone / iPad',
+                iosModalSub: 'Add the web app to your Home Screen in 2 easy steps:',
+                iosStep1: 'Tap the <span class="pwa-badge-inline"><i class="fas fa-arrow-up-from-bracket"></i> Share</span> button in your Safari toolbar.',
+                iosStep2: 'Scroll down and tap <span class="pwa-badge-inline"><i class="far fa-plus-square"></i> Add to Home Screen</span>.',
+                iosStep3: 'Tap <strong>"Add"</strong> in the top right corner to finish.',
+                androidModalTitle: 'Install K-7 VTC App',
+                androidModalSub: 'To add the app to your device:',
+                androidStep1: 'Tap the browser menu <span class="pwa-badge-inline"><i class="fas fa-ellipsis-vertical"></i></span> in the top right corner.',
+                androidStep2: 'Select <span class="pwa-badge-inline"><i class="fas fa-mobile-screen-button"></i> Install app</span> or <strong>"Add to Home screen"</strong>.',
+                closeBtn: 'Got it'
+            },
+            es: {
+                bannerTitle: 'Aplicación K-7 VTC',
+                bannerSub: 'Instale nuestra app en iOS y Android para reservar en 1 clic',
+                installBtn: 'Instalar',
+                footerBtn: 'Instalar Aplicación (iOS / Android)',
+                iosModalTitle: 'Instalar K-7 VTC en iPhone / iPad',
+                iosModalSub: 'Añada la aplicación a su pantalla de inicio en 2 pasos:',
+                iosStep1: 'Pulse el botón <span class="pwa-badge-inline"><i class="fas fa-arrow-up-from-bracket"></i> Compartir</span> en la barra de Safari.',
+                iosStep2: 'Desplácese y seleccione <span class="pwa-badge-inline"><i class="far fa-plus-square"></i> Añadir a pantalla de inicio</span>.',
+                iosStep3: 'Pulse <strong>«Añadir»</strong> arriba a la derecha para finalizar.',
+                androidModalTitle: 'Instalar la aplicación K-7 VTC',
+                androidModalSub: 'Para instalar la aplicación en su dispositivo:',
+                androidStep1: 'Pulse el menú <span class="pwa-badge-inline"><i class="fas fa-ellipsis-vertical"></i></span> de su navegador (arriba a la derecha).',
+                androidStep2: 'Seleccione <span class="pwa-badge-inline"><i class="fas fa-mobile-screen-button"></i> Instalar aplicación</span> o <strong>«Añadir a pantalla de inicio»</strong>.',
+                closeBtn: 'Entendido'
+            },
+            de: {
+                bannerTitle: 'K-7 VTC App',
+                bannerSub: 'App auf iOS & Android installieren (1-Klick-Buchung & Offline-Zugriff)',
+                installBtn: 'Installieren',
+                footerBtn: 'App installieren (iOS / Android)',
+                iosModalTitle: 'K-7 VTC auf iPhone / iPad installieren',
+                iosModalSub: 'Fügen Sie die App in 2 Schritten zu Ihrem Home-Bildschirm hinzu:',
+                iosStep1: 'Tippen Sie in Safari auf das Symbol <span class="pwa-badge-inline"><i class="fas fa-arrow-up-from-bracket"></i> Teilen</span>.',
+                iosStep2: 'Scrollen Sie nach unten und wählen Sie <span class="pwa-badge-inline"><i class="far fa-plus-square"></i> Zum Home-Bildschirm</span>.',
+                iosStep3: 'Tippen Sie oben rechts auf <strong>„Hinzufügen“</strong>.',
+                androidModalTitle: 'K-7 VTC App installieren',
+                androidModalSub: 'So installieren Sie die App auf Ihrem Gerät:',
+                androidStep1: 'Tippen Sie oben rechts auf das Browser-Menü <span class="pwa-badge-inline"><i class="fas fa-ellipsis-vertical"></i></span>.',
+                androidStep2: 'Wählen Sie <span class="pwa-badge-inline"><i class="fas fa-mobile-screen-button"></i> App installieren</span> oder <strong>„Zum Startbildschirm hinzufügen“</strong>.',
+                closeBtn: 'Verstanden'
+            }
+        };
+
+        const t = i18n[lang] || i18n.fr;
+        const iconUrl = `${assetPrefix}assets/icon-192.png`;
+
+        let deferredPrompt = null;
+
+        // Modal builder for iOS or manual install instructions
+        const showInstallModal = () => {
+            const existing = document.getElementById('pwa-install-modal');
+            if (existing) existing.remove();
+
+            const modalOverlay = document.createElement('div');
+            modalOverlay.id = 'pwa-install-modal';
+            modalOverlay.className = 'pwa-modal-overlay';
+
+            const stepsHtml = isIOS
+                ? `
+                    <div class="pwa-step-item">
+                        <span class="pwa-step-num">1</span>
+                        <div>${t.iosStep1}</div>
+                    </div>
+                    <div class="pwa-step-item">
+                        <span class="pwa-step-num">2</span>
+                        <div>${t.iosStep2}</div>
+                    </div>
+                    <div class="pwa-step-item">
+                        <span class="pwa-step-num">3</span>
+                        <div>${t.iosStep3}</div>
+                    </div>
+                `
+                : `
+                    <div class="pwa-step-item">
+                        <span class="pwa-step-num">1</span>
+                        <div>${t.androidStep1}</div>
+                    </div>
+                    <div class="pwa-step-item">
+                        <span class="pwa-step-num">2</span>
+                        <div>${t.androidStep2}</div>
+                    </div>
+                `;
+
+            modalOverlay.innerHTML = `
+                <div class="pwa-modal-card" role="dialog" aria-modal="true">
+                    <button type="button" class="pwa-modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+                    <img src="${iconUrl}" alt="K-7 VTC App" class="pwa-modal-logo">
+                    <h3>${isIOS ? t.iosModalTitle : t.androidModalTitle}</h3>
+                    <p class="pwa-modal-subtitle">${isIOS ? t.iosModalSub : t.androidModalSub}</p>
+                    <div class="pwa-steps-list">
+                        ${stepsHtml}
+                    </div>
+                    <button type="button" class="btn btn-primary pwa-modal-ok-btn" style="width: 100%;">${t.closeBtn}</button>
+                </div>
+            `;
+
+            document.body.appendChild(modalOverlay);
+
+            const closeModal = () => modalOverlay.remove();
+            modalOverlay.querySelector('.pwa-modal-close').addEventListener('click', closeModal);
+            modalOverlay.querySelector('.pwa-modal-ok-btn').addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+        };
+
+        // Main install handler (triggers native prompt on Android/Chrome or visual guide on iOS)
+        const handleInstallClick = async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                if (outcome === 'accepted') {
+                    const banner = document.getElementById('pwa-install-banner');
+                    if (banner) banner.remove();
+                }
+            } else {
+                showInstallModal();
+            }
+        };
+
+        // Add persistent "Install App (iOS / Android)" button in Footer
+        const footerBrand = document.querySelector('.footer-brand');
+        if (footerBrand && !document.querySelector('.pwa-footer-install-btn')) {
+            const footerBtn = document.createElement('button');
+            footerBtn.type = 'button';
+            footerBtn.className = 'pwa-footer-install-btn';
+            footerBtn.innerHTML = `<i class="fas fa-mobile-screen-button"></i> <span>${t.footerBtn}</span>`;
+            footerBtn.addEventListener('click', handleInstallClick);
+            footerBrand.appendChild(footerBtn);
+        }
+
+        // Create floating bottom install banner if not dismissed in this session
+        const createBanner = () => {
+            if (sessionStorage.getItem('pwaBannerDismissed') === 'true') return;
+            if (document.getElementById('pwa-install-banner')) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'pwa-install-banner';
+            banner.className = 'pwa-install-banner';
+            banner.innerHTML = `
+                <div class="pwa-banner-left">
+                    <img src="${iconUrl}" alt="K-7 VTC" class="pwa-banner-icon">
+                    <div class="pwa-banner-info">
+                        <h4>${t.bannerTitle} <i class="fab fa-apple" style="font-size:0.85em; color:#d4af37;"></i> <i class="fab fa-android" style="font-size:0.85em; color:#d4af37;"></i></h4>
+                        <p>${t.bannerSub}</p>
+                    </div>
+                </div>
+                <div class="pwa-banner-actions">
+                    <button type="button" class="pwa-install-btn">
+                        <i class="fas fa-download"></i> ${t.installBtn}
+                    </button>
+                    <button type="button" class="pwa-close-btn" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(banner);
+
+            banner.querySelector('.pwa-install-btn').addEventListener('click', handleInstallClick);
+            banner.querySelector('.pwa-close-btn').addEventListener('click', () => {
+                sessionStorage.setItem('pwaBannerDismissed', 'true');
+                banner.remove();
+            });
+        };
+
+        // Capture native install prompt on Android / Chrome / Edge
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            createBanner();
+        });
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            const banner = document.getElementById('pwa-install-banner');
+            if (banner) banner.remove();
+        });
+
+        // Show banner after a short delay on mobile (iOS & Android) or any browser
+        setTimeout(() => {
+            createBanner();
+        }, 2500);
+    };
+
+    initPWA();
 });
+
 
