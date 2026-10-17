@@ -1,4 +1,4 @@
-const CACHE_NAME = 'k7-vtc-pwa-v1';
+const CACHE_NAME = 'k7-vtc-pwa-v2';
 const CORE_ASSETS = [
   '/',
   '/index.html',
