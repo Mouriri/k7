@@ -13,6 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const burger = document.querySelector('.burger');
     const navLinks = document.querySelector('.nav-links');
     
+    // Toggle "Services" submenu on click/tap (mobile menu & footer)
+    document.querySelectorAll('.nav-dropdown > a').forEach(dropTrigger => {
+        dropTrigger.addEventListener('click', function (e) {
+            const parentDropdown = this.closest('.nav-dropdown');
+            const isMobileView = window.innerWidth <= 992 || (navLinks && navLinks.classList.contains('active'));
+            const isInFooter = Boolean(this.closest('.footer'));
+
+            if (isMobileView || isInFooter) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (parentDropdown) {
+                    parentDropdown.classList.toggle('open');
+                }
+            }
+        });
+    });
+
     if (burger && navLinks) {
         burger.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -25,14 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
+                    document.querySelectorAll('.nav-links .nav-dropdown.open').forEach(d => d.classList.remove('open'));
                 }
             }
         });
 
-        // Close mobile menu when clicking a link
+        // Close mobile menu when clicking a link (except the Services dropdown toggle)
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                if (link.parentElement && link.parentElement.classList.contains('nav-dropdown')) {
+                    return;
+                }
                 navLinks.classList.remove('active');
+                document.querySelectorAll('.nav-links .nav-dropdown.open').forEach(d => d.classList.remove('open'));
                 const icon = burger.querySelector('i');
                 if (icon) {
                     icon.classList.remove('fa-times');
@@ -45,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
             if (navLinks.classList.contains('active') && !e.target.closest('.navbar')) {
                 navLinks.classList.remove('active');
+                document.querySelectorAll('.nav-links .nav-dropdown.open').forEach(d => d.classList.remove('open'));
                 const icon = burger.querySelector('i');
                 if (icon) {
                     icon.classList.remove('fa-times');
@@ -57,6 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const isDropdownTrigger = this.parentElement && this.parentElement.classList.contains('nav-dropdown');
+            const isMobileView = window.innerWidth <= 992 || (navLinks && navLinks.classList.contains('active'));
+            const isInFooter = Boolean(this.closest('.footer'));
+
+            if (isDropdownTrigger && (isMobileView || isInFooter)) {
+                return;
+            }
+
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
